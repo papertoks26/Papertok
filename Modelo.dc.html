@@ -28,9 +28,9 @@
 <div style="min-height:100vh">
   <header style="position:sticky;top:0;z-index:50;background:rgba(252,251,249,0.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,0.06)">
     <div style="max-width:1180px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px">
-      <a href="Landing.dc.html"><img src="./logo-mrk4rsy9-x8ho.png" alt="PaperTok" style="height:60px;width:101px" /></a>
+      <a href="index.html"><img src="./logo-mrk4rsy9-x8ho.png" alt="PaperTok" style="height:60px;width:101px" /></a>
       <div style="display:flex;align-items:center;gap:16px">
-      <a href="Landing.dc.html#modelos" style="font-weight:700;font-size:14.5px;color:#4A4A52">{{ t.volver }}</a>
+      <a href="index.html#modelos" style="font-weight:700;font-size:14.5px;color:#4A4A52">{{ t.volver }}</a>
       <button onClick="{{ toggleLang }}" style="display:flex;align-items:center;gap:6px;background:#F3F1EC;border:1.5px solid #E7E5E0;border-radius:100px;padding:6px 10px;cursor:pointer;font-weight:700;font-size:13px" title="ES / EN">
         <span style="opacity:{{ esOpacity }}">🇪🇸</span><span style="width:1px;height:14px;background:#D8D6D0"></span><span style="opacity:{{ enOpacity }}">🇺🇸</span>
       </button>
@@ -39,7 +39,7 @@
   </header>
 
   <sc-if value="{{ model }}" hint-placeholder-val="{{ false }}">
-    <section style="max-width:1000px;margin:0 auto;padding:50px 32px 20px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start">
+    <section style="max-width:1000px;margin:0 auto;padding:50px 32px 20px;display:grid;grid-template-columns:{{ detailGrid }};gap:48px;align-items:start">
       <div style="border-radius:24px;overflow:hidden;background:linear-gradient(135deg,#F3F1EC,#EAE7E0);display:flex;align-items:center;justify-content:center;height:420px;animation:fadeUp 0.6s ease both;position:relative">
         <sc-if value="{{ model.model3d }}" hint-placeholder-val="{{ false }}">
           <model-viewer src="{{ model.model3d }}" alt="{{ model.name }}" camera-controls="true" auto-rotate="true" auto-rotate-delay="0" rotation-per-second="20deg" interaction-prompt="none" shadow-intensity="1" exposure="1" style="width:100%;height:100%"></model-viewer>
@@ -127,11 +127,18 @@ const i18nReady = import("./translations.js").then(m => {
 }).catch(e => console.error("translations.js failed to load", e));
 
 class Component extends DCLogic {
-  state = { models: [], modalOpen: false, confetti: [], lang: "es" };
+  state = { models: [], modalOpen: false, confetti: [], lang: "es", width: typeof window !== "undefined" ? window.innerWidth : 1280 };
+
+  _onResize = () => this.setState({ width: window.innerWidth });
 
   componentDidMount() {
     import("./models-data.js").then(m => this.setState({ models: m.MODELS }));
     i18nReady.then(() => this.setState({ lang: getLang_() }));
+    window.addEventListener("resize", this._onResize);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._onResize);
   }
 
   toggleLang = () => {
@@ -179,6 +186,7 @@ class Component extends DCLogic {
     const related = models.filter(m => m.slug !== slug).slice(0, 3).map(m => translateM(m, lang)).map(m => ({ ...m, href: `Modelo.dc.html?slug=${m.slug}`, cardBg: CARD_BG[m.category] || "linear-gradient(135deg,#F3F1EC,#EAE7E0)" }));
     return {
       t,
+      detailGrid: this.state.width < 800 ? "1fr" : "1fr 1fr",
       toggleLang: this.toggleLang,
       esOpacity: lang === "es" ? 1 : 0.35,
       enOpacity: lang === "en" ? 1 : 0.35,
