@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    @font-face{font-family:'Baloo Local';src:url('uploads/BALOO-REGULAR.TTF') format('truetype');font-weight:400 800;font-display:swap}
+    @font-face{font-family:'CreativeBlock';src:url('uploads/CREABBRG.TTF') format('truetype');font-weight:400;font-display:swap}
+    @font-face{font-family:'CreativeBlock';src:url('uploads/CREABBB.TTF') format('truetype');font-weight:700;font-display:swap}
+    body{margin:0;font-family:'Inter',system-ui,sans-serif;background:#fff;color:#2A2A2E;-webkit-font-smoothing:antialiased}
+    a{color:#EC1268;text-decoration:none}
+    a:hover{color:#C90E56}
+    h1,h2,h3{font-family:'Baloo Local','Baloo 2',system-ui,sans-serif}
+    ::selection{background:#FBD6E4}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes popC{from{opacity:0;transform:translateY(30px) scale(0.9)}to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(236,18,104,0.35)}50%{box-shadow:0 0 0 10px rgba(236,18,104,0)}}
+    @keyframes cardIn{from{opacity:0;transform:translateY(16px) scale(0.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+    @keyframes preloaderOut{to{opacity:0;visibility:hidden}}
+    @keyframes scissorsMove{from{left:-10%}to{left:110%}}
+    @keyframes dashReveal{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+    @keyframes logoPop{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</helmet>
+
+<div id="preloader" style="position:fixed;inset:0;z-index:9999;background:#fff;display:{{ preloaderDisplay }};flex-direction:column;align-items:center;justify-content:center;gap:34px;pointer-events:none;animation:preloaderOut 0.5s ease 2s forwards">
+  <img src="./logo-mrk4rsy9-x8ho.png" alt="PaperTok" style="height:70px;width:auto;animation:logoPop 0.6s ease both">
+  <div style="position:relative;width:min(280px,60vw);height:40px">
+    <div style="position:absolute;top:50%;left:0;width:100%;height:0;border-top:3px dashed #C9C7C0;transform:translateY(-50%);overflow:hidden;animation:dashReveal 1.8s ease 0.3s both"></div>
+    <div style="position:absolute;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:26px;animation:scissorsMove 1.8s ease 0.3s both">✂️</div>
+  </div>
+</div>
+
+<div style="min-height:100vh;overflow-x:hidden">
+
+  <!-- NAV -->
+  <header style="position:sticky;top:0;z-index:50;backdrop-filter:blur(8px);background-color:#FFFFFFEB;border-bottom:2px dashed #E7E5E0">
+    <div style="max-width:1180px;margin:0 auto;padding:{{ navPadV }} {{ pagePad }};display:flex;align-items:center;justify-content:space-between;gap:{{ navRowGap }}">
+      <img src="./logo-mrk4rsy9-x8ho.png" alt="PaperTok" style="height:{{ logoH2 }};width:auto;animation:fadeUp 0.7s ease both;position:relative;z-index:2;margin:{{ logoMargin }};flex:none">
+      <nav style="display:{{ navDisplay }};gap:{{ navGap }};font-size:{{ navFontSize }};font-weight:600;color:#4A4A52;flex-wrap:wrap;overflow-x:auto" data-nodrag="true">
+        <a href="#inicio" style="color:inherit;transition:color 0.15s ease" style-hover="color:#EC1268">{{ t.navInicio }}</a>
+        <a href="#modelos" style="color:inherit;transition:color 0.15s ease" style-hover="color:#EC1268">{{ t.navModelos }}</a>
+        <a href="#como-funciona" style="color:inherit;transition:color 0.15s ease" style-hover="color:#EC1268">{{ t.navComo }}</a>
+        <a href="#categorias" style="color:inherit;transition:color 0.15s ease" style-hover="color:#EC1268">{{ t.navCategorias }}</a>
+        <a href="#preguntas" style="color:inherit;transition:color 0.15s ease" style-hover="color:#EC1268">{{ t.navPreguntas }}</a>
+      </nav>
+      <div style="display:flex;align-items:center;gap:{{ navRightGap }};flex:none">
+      <button onClick="{{ toggleLang }}" style="display:{{ langSwitchDisplay }};align-items:center;gap:6px;background:#F3F1EC;border:1.5px solid #E7E5E0;border-radius:100px;padding:6px 10px;cursor:pointer;font-weight:700;font-size:13px" title="ES / EN">
+        <span style="opacity:{{ esOpacity }}">🇪🇸</span><span style="width:1px;height:14px;background:#D8D6D0"></span><span style="opacity:{{ enOpacity }}">🇺🇸</span>
+      </button>
+      <a href="#modelos" style="background:#EC1268;color:#fff;padding:{{ ctaPad }};border-radius:100px;font-weight:700;font-size:14px;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;transition:transform 0.15s ease,background 0.15s ease" style-hover="background:#C90E56;color:#fff;transform:scale(1.04)"><img src="uploads/regalo.png" alt="" style="width:21px;height:21px;filter:brightness(0) invert(1)"> <span style="{{ ctaLabelDisplay }}">{{ t.navCta }}</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" style="max-width: 1180px; margin: 0 auto; padding: {{ heroPadTop }} {{ pagePad }} 0px; display: grid; grid-template-columns: {{ heroGrid }}; gap: {{ heroGap }}; align-items: center">
+    <div style="max-width: 100%; order: {{ heroTextOrder }}">
+      <div style="display: inline-block; color: #1C9CE7; font-weight: 700; font-size: 20px; padding: 7px 14px; border-radius: 100px; letter-spacing: 0.02em; animation: fadeUp 0.7s ease 0.05s both; font-family: 'CreativeBlock',sans-serif">{{ t.heroTag }}</div>
+      <h1 style="font-size: {{ h1Size }}; line-height: 1; font-weight: 700; margin: 18px 0 0; animation: fadeUp 0.7s ease 0.15s both; max-width: 100%">{{ t.heroTitle }}<span style="color: rgb(28, 156, 231);">{{ t.heroTitleAccent }}</span></h1>
+      <p style="font-size: {{ pSize }}; line-height: 1.55; color: #5B5B63; margin: 20px 0 30px; max-width: 460px; animation: fadeUp 0.7s ease 0.25s both">{{ t.heroSubtitle }}</p>
+      <div style="display: flex; gap: 14px; flex-wrap: wrap; animation: fadeUp 0.7s ease 0.35s both">
+        <a href="#modelos" style="background: #EC1268; color: #fff; padding: 16px 26px; border-radius: 100px; font-weight: 700; font-size: 16px; display: inline-flex; align-items: center; gap: 8px; animation: ctaPulse 2.8s ease-in-out 1.2s infinite; transition: transform 0.15s ease; font-family: CreativeBlock" style-hover="transform:translateY(-2px) scale(1.03)"><img src="uploads/regalo.png" alt="" style="width:23px;height:23px;filter:brightness(0) invert(1)"> {{ t.heroCta }}</a>
+        
+      </div>
+    </div>
+
+    <div style="position: relative; max-width: 100%; order: {{ heroImageOrder }}">
+    <img src="uploads/Portada-16866cb4.png" alt="Modelos de papel PaperTok: capibara, cactus, gatito y perrito" style="width: 100%; max-width: 548px; display: block; margin: 0 auto; animation: popC 0.8s cubic-bezier(.2,.9,.3,1.2) 0.3s both; height: auto"></div>
+  </section>
+
+  <!-- MODELOS -->
+  <section id="modelos" style="max-width:1180px;margin:0 auto;padding:8px {{ pagePad }} 0">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 22px">
+      <h2 style="font-size:{{ h2Size }};font-weight:700;margin:0">{{ sectionTitle }}</h2>
+      
+    </div>
+
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px">
+      <sc-for list="{{ categories }}" as="cat" hint-placeholder-count="5">
+        <button onClick="{{ setCategory }}" data-cat="{{ cat.key }}" style="{{ cat.chipStyle }}">{{ cat.emoji }} {{ cat.label }}</button>
+      </sc-for>
+    </div>
+
+    <div style="display:grid;grid-template-columns:{{ modelsGrid }};gap:14px">
+      <sc-for list="{{ filteredModels }}" as="m" hint-placeholder-count="6">
+        <a href="{{ m.href }}" key="{{ m.animKey }}" style="display:block;background:#fff;border-radius:20px;border:1px solid #EFEDE8;overflow:hidden;text-decoration:none;color:inherit;box-shadow:0 2px 8px rgba(20,20,30,0.04);transition:transform 0.25s cubic-bezier(.2,.8,.3,1),box-shadow 0.25s ease;animation:cardIn 0.45s ease both;position:relative" style-hover="transform:translateY(-6px);box-shadow:0 18px 30px rgba(20,20,30,0.13)">
+          <div style="position:absolute;top:0;right:0;width:0;height:0;border-style:solid;border-width:0 26px 26px 0;border-color:transparent #EFEDE8 transparent transparent;z-index:2"></div>
+          <sc-if value="{{ m.tagNew }}"><div style="position:absolute;top:12px;left:12px;background:#1C9CE7;color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:100px;z-index:3;font-family:'CreativeBlock',sans-serif">Nuevo</div></sc-if>
+          <div style="overflow: hidden; height: 190px; background: {{ m.cardBg }}; display: flex; align-items: center; justify-content: center">
+            <sc-if value="{{ m.image }}" hint-placeholder-val="{{ false }}">
+              <img src="{{ m.image }}" alt="{{ m.altText }}" loading="lazy" style="width:78%;height:78%;object-fit:contain;transition:transform 0.3s ease" style-hover="transform:scale(1.045)">
+            </sc-if>
+            <sc-if value="{{ m.noImage }}">
+              <image-slot id="{{ m.slug }}" shape="rect" placeholder="Foto próximamente" style="width:100%;height:100%"></image-slot>
+            </sc-if>
+          </div>
+          <div style="padding:18px 18px 20px">
+            <div style="font-weight: 700; font-size: 17px; margin-bottom: 8px">{{ m.cardTitle }}</div>
+            <div style="display:flex;gap:12px;font-size:12.5px;color:#8A8A90;font-weight:600;margin-bottom:14px">
+              <span>{{ m.difficultyLabel }}</span>
+            </div>
+            <div style="background: #EC1268; color: #fff; text-align: center; padding: 11px; border-radius: 12px; font-weight: 700; font-size: 14px; transition: background 0.15s ease; font-family: CreativeBlock">{{ t.wantIt }}</div>
+          </div>
+        </a>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section id="como-funciona" style="padding:4px {{ pagePad }} 0" ref="{{ howRef }}">
+    <div style="max-width:1180px;margin:0 auto;display:grid;grid-template-columns:{{ howGrid }};gap:24px;align-items:start">
+      <div style="border-radius: 24px; padding: 32px 28px; position: relative; order: 1">
+        <h2 style="font-size: 28px; font-weight: 800; margin: 0 0 6px; position: relative; display: inline-block">{{ t.comoTitle }}</h2>
+        <div style="width:56px;height:4px;background:#EC1268;border-radius:4px;margin-bottom:30px"></div>
+        <div style="display:grid;grid-template-columns:{{ comoGrid }};gap:{{ comoGap }};position:relative">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;opacity:{{ step1Op }};transform:{{ step1T }};transition:opacity 0.6s ease,transform 0.6s ease;position:relative">
+            <div style="width:78px;height:78px;border-radius:50%;background:#EAF4FD;display:flex;align-items:center;justify-content:center;font-size:30px;position:relative">⬇️<div style="position:absolute;top:-6px;right:-6px;width:24px;height:24px;border-radius:50%;background:#EC1268;color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;z-index:2">1</div></div>
+            <div style="font-weight: 800; font-size: 14.5px; font-family: CreativeBlock">{{ t.step1Title }}</div>
+            <div style="font-size:12.5px;color:#8A8A90;text-align:center;line-height:1.4">{{ t.step1Desc }}</div>
+            
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;opacity:{{ step2Op }};transform:{{ step2T }};transition:opacity 0.6s ease 0.15s,transform 0.6s ease 0.15s;position:relative">
+            <div style="width:78px;height:78px;border-radius:50%;background:#EAF4FD;display:flex;align-items:center;justify-content:center;font-size:30px;position:relative">🖨️<div style="position:absolute;top:-6px;right:-6px;width:24px;height:24px;border-radius:50%;background:#EC1268;color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;z-index:2">2</div></div>
+            <div style="font-weight: 800; font-size: 14.5px; font-family: CreativeBlock">{{ t.step2Title }}</div>
+            <div style="font-size:12.5px;color:#8A8A90;text-align:center;line-height:1.4">{{ t.step2Desc }}</div>
+            
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:10px;opacity:{{ step3Op }};transform:{{ step3T }};transition:opacity 0.6s ease 0.3s,transform 0.6s ease 0.3s;position:relative">
+            <div style="width:78px;height:78px;border-radius:50%;background:#EAF4FD;display:flex;align-items:center;justify-content:center;font-size:30px;position:relative">✂️<div style="position:absolute;top:-6px;right:-6px;width:24px;height:24px;border-radius:50%;background:#EC1268;color:#fff;font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;z-index:2">3</div></div>
+            <div style="font-weight: 800; font-size: 14.5px; font-family: CreativeBlock">{{ t.step3Title }}</div>
+            <div style="font-size:12.5px;color:#8A8A90;text-align:center;line-height:1.4">{{ t.step3Desc }}</div>
+            
+          </div>
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 10px; position: relative">
+            
+            <div style="width:78px;height:78px;border-radius:50%;background:#EAF4FD;display:flex;align-items:center;justify-content:center;font-size:30px;position:relative">📷<div style="position: absolute; top: 16px; transform: translateY(-50%); width: 24px; height: 24px; border-radius: 50%; background: #EC1268; color: #fff; font-weight: 800; font-size: 12px; display: flex; align-items: center; justify-content: center; z-index: 2; left: 55px">4</div></div>
+            <div style="font-weight: 800; font-size: 14.5px; font-family: CreativeBlock">{{ t.step4Title }}</div>
+            <div style="font-size:12.5px;color:#8A8A90;text-align:center;line-height:1.4">{{ t.step4Desc }}</div>
+          </div>
+        <div style="position: absolute; top: 25px; font-size: 45px; color: #C9C7C0; display: {{ arrowDisplay }}; left: 25%">→</div><div style="position: absolute; top: 24px; font-size: 45px; color: #C9C7C0; display: {{ arrowDisplay }}; left: 50%">→</div><div style="position: absolute; top: 22px; font-size: 45px; color: #C9C7C0; display: {{ arrowDisplay }}; left: 75%">→</div></div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: {{ howSubGrid }}; gap: 24px; order: 2">
+      <div style="background: #1C9CE7; border-radius: 24px; padding: 30px 28px; color: #fff; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 18px; order: 2; position: relative; max-width: 100%">
+        <div style="position: relative">
+          
+          
+          <div style="font-size: 24px; font-weight: 800; line-height: 1.2; margin-top: -8px; margin-bottom: 8px; font-family: CreativeBlock">{{ t.personalizeTitle }}</div><p style="font-size: 13.5px; line-height: 1.5; opacity: 0.9; margin: 0 0 14px">{{ t.personalizeDesc }}</p><div style="background: #fff; color: #1C9CE7; font-weight: 800; font-size: 13px; padding: 11px 20px; border-radius: 100px; text-align: center; width: fit-content">{{ t.personalizeSoon }}</div>
+          
+        </div>
+        <div style="position:relative;width:100px;height:130px;flex:none">
+          <img src="uploads/Personalido-auto.jpg" alt="PaperTok de auto personalizado" loading="lazy" style="position: absolute; top: 51px; left: 7px; width: 98px; height: 121px; border-radius: 12px; object-fit: cover; border: 3px solid rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 16px; transform: rotate(7deg)">
+          <img src="uploads/Personalizado.jpg" alt="Persona con su PaperTok personalizado" loading="lazy" style="position: absolute; top: -22px; right: -8px; width: 100px; height: 121px; border-radius: 12px; object-fit: cover; border: 3px solid #fff; box-shadow: 0 8px 16px rgba(0,0,0,0.25); transform: rotate(-8deg)">
+        </div>
+      </div>
+
+      <div style="border: 2px dashed #EC1268; border-radius: 22px; padding: 26px 24px; display: flex; flex-direction: column; justify-content: center; gap: 14px; background: #FFFBFC; order: 3">
+        
+        <div>
+          <div style="font-weight: 700; font-size: 24px; margin-bottom: 4px; font-family: CreativeBlock; color: #EC1268">{{ t.newsletterTitle }}</div>
+          <sc-if value="{{ subscribed }}">
+            <div style="color:#1C9CE7;font-weight:700;font-size:14.5px">{{ t.newsletterDone }}</div>
+          </sc-if>
+          <sc-if value="{{ notSubscribed }}">
+            <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+              <input type="email" value="{{ email }}" onChange="{{ onEmailChange }}" placeholder="{{ t.newsletterEmailPh }}" style="flex:1;min-width:180px;padding:12px 14px;border-radius:12px;border:1.5px solid #E7E5E0;font-size:14px;font-family:inherit">
+              <button onClick="{{ subscribe }}" style="background:#EC1268;color:#fff;border:none;padding:12px 18px;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;transition:transform 0.15s ease" style-hover="transform:translateY(-2px)">{{ t.newsletterBtn }}</button>
+            </div>
+            <div style="margin-top:8px;font-size:12px"><a href="#modelos">{{ t.newsletterSkip }}</a></div>
+          </sc-if>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 32px; flex-wrap: wrap; max-width: 100%">
+      <a href="https://www.tiktok.com/@papertoks?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noopener"><img src="uploads/Botón tik tok.png" alt="Síguenos en TikTok" style="height: 43px; transition: transform 0.15s ease; width: 149px" style-hover="transform:translateY(-2px)"></a>
+      <a href="#" target="_blank" rel="noopener"><img src="uploads/Botón Instagram.png" alt="Síguenos en Instagram" style="height: 43px; transition: transform 0.15s ease; width: 153px" style-hover="transform:translateY(-2px)"></a>
+      <a href="https://www.youtube.com/@Papertok-u8z" target="_blank" rel="noopener"><img src="uploads/YT-70ebf17a.png" alt="Síguenos en YouTube" style="height: 47px; transition: transform 0.15s ease; width: 146px" style-hover="transform:translateY(-2px)"></a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="preguntas" style="max-width: 800px; margin: 0 auto; padding: 40px {{ pagePad }} 70px">
+    <h2 style="font-size: {{ faqTitleSize }}; font-weight: 700; text-align: center; margin: 0 0 30px">{{ t.faqTitle }}</h2>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+        <div style="background:#fff;border:1px solid #EFEDE8;border-radius:14px;overflow:hidden">
+          <div onClick="{{ toggleFaq }}" data-idx="{{ $index }}" style="padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;cursor:pointer;font-weight:700;font-size:15px">
+            {{ f.q }}
+            <span style="flex:none;transition:transform 0.25s ease;transform:{{ f.arrowT }};color:#EC1268;font-size:18px">+</span>
+          </div>
+          <div style="max-height:{{ f.maxH }};overflow:hidden;transition:max-height 0.3s ease">
+            <div style="padding:0 20px 18px;color:#5B5B63;font-size:14.5px;line-height:1.6">{{ f.a }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#1A1A1E;color:#C9C7C4;padding:32px {{ pagePad }} 20px">
+    <div style="max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: {{ footerGrid }}; gap: 20px">
+      <div>
+        <img src="./logo-mrk4rsy9-x8ho.png" alt="PaperTok" style="height: 68px; width: 109px; border-radius: 10px; padding: 6px 10px; object-fit: contain">
+        <div style="font-size: 12.5px; color: #8A8A90; margin-top: 10px; width: 120px; height: 30px; text-align: center">{{ t.footerCreatedBy }} <br><a href="https://www.youtube.com/@pablocespedes78" target="_blank" rel="noopener" style="color:#8A8A90;text-decoration:underline">Pablo Céspedes</a></div>
+      </div>
+      <div>
+        <div style="font-size:12px;font-weight:800;color:#fff;letter-spacing:0.05em;margin-bottom:14px">{{ t.footerEnlaces }}</div>
+        <div style="display:flex;flex-direction:column;gap:10px;font-size:13.5px">
+          <a href="#inicio" style="color:#C9C7C4">{{ t.navInicio }}</a>
+          <a href="#modelos" style="color:#C9C7C4">{{ t.navModelos }}</a>
+          <a href="#como-funciona" style="color:#C9C7C4">{{ t.navComo }}</a>
+          <a href="#preguntas" style="color:#C9C7C4">{{ t.navPreguntas }}</a>
+        </div>
+      </div>
+      
+      <div>
+        <div style="font-size:12px;font-weight:800;color:#fff;letter-spacing:0.05em;margin-bottom:14px">{{ t.footerSiguenos }}</div>
+      <div style="display: flex; flex-direction: row; gap: 12px">
+          
+          <a href="https://www.tiktok.com/@papertoks?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noopener"><img src="uploads/tiktok icono.png" alt="Síguenos en TikTok" style="height: 48px; width: 48px;border-radius:50%"></a><a href="#" target="_blank" rel="noopener"><img src="uploads/Insta icono.png" alt="Síguenos en Instagram" style="height: 48px; width: 48px;border-radius:50%"></a><a href="https://www.youtube.com/@Papertok-u8z" target="_blank" rel="noopener"><img src="uploads/YT icono.png" alt="Síguenos en YouTube" style="height: 48px; width: 48px;border-radius:50%"></a>
+        </div></div><div>
+        <div style="font-size:12px;font-weight:800;color:#fff;letter-spacing:0.05em;margin-bottom:14px">{{ t.footerNovedades }}</div>
+        <p style="font-size:13px;color:#8A8A90;margin:0 0 12px;line-height:1.5">{{ t.footerNewsletterDesc }}</p>
+        <sc-if value="{{ subscribed }}">
+          <div style="color:#1C9CE7;font-weight:700;font-size:13px">{{ t.newsletterDone }}</div>
+        </sc-if>
+        <sc-if value="{{ notSubscribed }}">
+          <div style="display:flex;gap:8px">
+            <input type="email" value="{{ email }}" onChange="{{ onEmailChange }}" placeholder="{{ t.footerEmailPh }}" style="flex:1;min-width:0;padding:10px 12px;border-radius:8px;border:1px solid #3A3A3E;background:#242428;color:#fff;font-size:13px;font-family:inherit">
+            <button onClick="{{ subscribe }}" style="background:#EC1268;color:#fff;border:none;padding:10px 16px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap">{{ t.footerSendBtn }}</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+    <div style="text-align:center;font-size:12px;color:#6B6B72;margin-top:20px;border-top:1px solid #2E2E32;padding-top:16px">{{ t.footerRights }}</div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const UI_FALLBACK_ES = {
+  navInicio: "Inicio", navModelos: "Modelos", navComo: "Cómo funciona", navCategorias: "Categorías", navPreguntas: "Preguntas",
+  navCta: "Descargar modelos", heroTag: "¡GOMA, PAPEL Y TIJERAS!",
+  heroTitle: "Collecciona tus modelos de papel", heroTitleAccent: " gratis",
+  heroSubtitle: "Descarga las plantillas gratuitas en PDF y convierte unas cuantas hojas de papel en algo genial.",
+  heroCta: "Descargar modelos gratis", sectionTitleAll: "Descargar modelos gratis", sectionTitleFiltered: "Modelos",
+  wantIt: "¡Lo quiero!", comoTitle: "¿Cómo funciona?",
+  step1Title: "DESCARGA", step1Desc: "Elige tu modelo favorito y descárgalo gratis.",
+  step2Title: "IMPRIME", step2Desc: "Imprime las hojas en el papel o cartulina",
+  step3Title: "RECORTA Y ARMA", step3Desc: "Sigue las líneas, dobla y arma tu PaperTok.",
+  step4Title: "COMPARTE", step4Desc: "Tómale una foto y etiquétanos en redes.",
+  personalizeTitle: "¡Personaliza tu PaperTok!",
+  personalizeDesc: "Envíanos tu foto y te hacemos tu Papertok personalizado. ¡Ideal para regalos especiales!",
+  personalizeSoon: "MUY PRONTO",
+  newsletterTitle: "¿Te avisamos cuando salga un modelo nuevo?",
+  newsletterDone: "🚀 ¡Listo! Te avisaremos apenas salga.",
+  newsletterEmailPh: "Tu correo electrónico", newsletterBtn: "🚀 Quiero enterarme",
+  newsletterSkip: "No, gracias. Quiero descargar sin suscribirme.",
+  faqTitle: "¿Tienes dudas? Aquí te las resolvemos.",
+  footerCreatedBy: "Creado por", footerEnlaces: "ENLACES", footerSiguenos: "SÍGUENOS", footerNovedades: "RECIBE NOVEDADES",
+  footerNewsletterDesc: "Déjanos tu email para avisarte cuando subamos nuevos modelos.",
+  footerEmailPh: "Tu email", footerSendBtn: "ENVIAR",
+  footerRights: "© 2026 PaperTok. Todos los derechos reservados.",
+  faqs: []
+};
+let UI_T = { es: UI_FALLBACK_ES, en: UI_FALLBACK_ES }, TR_MODEL = null, CAT_I18N = null, getLang_ = () => "es", setLang_ = null;
+const i18nReady = import("./translations.js").then(m => {
+  UI_T = m.UI; TR_MODEL = m.translateModel; CAT_I18N = m.CATEGORY_I18N; getLang_ = m.getLang; setLang_ = m.setLang;
+}).catch(e => console.error("translations.js failed to load", e));
+
+const CARD_BG = {
+  animales: "linear-gradient(135deg,#FDECD2,#F7D9A8)",
+  plantas: "linear-gradient(135deg,#DCF2D8,#B8E3B0)",
+  videojuegos: "linear-gradient(135deg,#E2E2FA,#C7C7F2)",
+  series: "linear-gradient(135deg,#FBD9E7,#F3B8D2)",
+  retro: "linear-gradient(135deg,#FFF3C4,#F5DE8E)"
+};
+
+class Component extends DCLogic {
+  state = {
+    models: [], categories: [], allCategories: [],
+    activeCategory: "todos",
+    email: "", subscribed: false,
+    openFaqIdx: null,
+    step1: false, step2: false, step3: false,
+    width: typeof window !== "undefined" ? window.innerWidth : 1280,
+    lang: "es",
+    preloaderDone: false
+  };
+
+  _observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        this.setState({ step1: true });
+        setTimeout(() => this.setState({ step2: true }), 150);
+        setTimeout(() => this.setState({ step3: true }), 300);
+        this._observer.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  _onResize = () => this.setState({ width: window.innerWidth });
+
+  componentDidMount() {
+    import("./models-data.js").then(m => {
+      this.setState({ models: m.MODELS, categories: m.CATEGORIES, allCategories: m.ALL_CATEGORIES });
+    });
+    i18nReady.then(() => this.setState({ lang: getLang_() }));
+    if (this._howEl) this._observer.observe(this._howEl);
+    window.addEventListener("resize", this._onResize);
+    this._preloaderTimer = setTimeout(() => this.setState({ preloaderDone: true }), 2200);
+  }
+
+  toggleLang = () => {
+    const next = this.state.lang === "es" ? "en" : "es";
+    setLang_ && setLang_(next);
+    this.setState({ lang: next });
+  };
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._onResize);
+    this._observer.disconnect();
+    clearTimeout(this._preloaderTimer);
+  }
+
+  setHowRef = (el) => {
+    this._howEl = el;
+    if (el) this._observer.observe(el);
+  };
+
+  setCategory = (e) => {
+    const key = e.currentTarget.getAttribute("data-cat");
+    this.setState({ activeCategory: key });
+  };
+
+  goCategory = (e) => {
+    const label = e.currentTarget.getAttribute("data-catlabel");
+    this.setState({ activeCategory: label || "todos" });
+    const target = document.getElementById("modelos");
+    if (target) target.scrollIntoView({ behavior: "smooth" });
+  };
+
+  onEmailChange = (e) => this.setState({ email: e.target.value });
+
+  subscribe = () => {
+    const email = this.state.email;
+    if (!email || !email.includes("@")) return;
+    this.setState({ subscribed: true });
+    fetch("https://formspree.io/f/mvzebdvb", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ email })
+    }).catch(() => {});
+  };
+
+  toggleFaq = (e) => {
+    const idx = Number(e.currentTarget.getAttribute("data-idx"));
+    this.setState(s => ({ openFaqIdx: s.openFaqIdx === idx ? null : idx }));
+  };
+
+  renderVals() {
+    const FAQS = [
+      { q: "¿Son realmente gratuitos los modelos?", a: "Sí, todos los modelos que ves en PaperTok se pueden descargar gratis, sin trucos ni letra chica." },
+      { q: "¿En qué tamaño debo imprimir?", a: "Todos los PDF están preparados para hoja tamaño Carta o A4. Imprime al 100%, sin ajustar a página." },
+      { q: "¿Qué tipo de papel debo usar?", a: "Recomendamos papel o cartulina de 120g o más para que el modelo quede firme. Papel normal también funciona para empezar." },
+      { q: "¿Puedo modificar los modelos?", a: "¡Claro! Píntalos, decóralos o combínalos como quieras. Nos encanta ver tus versiones." },
+      { q: "¿Puedo vender los modelos que descargo?", a: "Los modelos son para uso personal. Si quieres venderlos o usarlos comercialmente, escríbenos primero." },
+      { q: "¿Las personalizaciones tienen un costo?", a: "Sí, esa es nuestra parte comercial. Los demás modelos de la web siempre serán gratuitos." }
+    ];
+
+    const w = this.state.width;
+    const isMobile = w < 640;
+    const isTablet = w >= 640 && w < 1024;
+    const isDesktop = w >= 1024;
+
+    const catLabelMap = { todos: "Todos", animales: "Animales", plantas: "Plantas", videojuegos: "Videojuegos", retro: "Retro", series: "Series y Películas" };
+    const cats = (this.state.categories || []).map(c => {
+      const active = this.state.activeCategory === c.key;
+      return {
+        ...c,
+        label: (CAT_I18N && CAT_I18N[this.state.lang] && CAT_I18N[this.state.lang][catLabelMap[c.key]]) || c.label,
+        chipStyle: `padding:10px 18px;border-radius:100px;font-weight:700;font-size:14px;border:1.5px solid ${active ? "#EC1268" : "#E7E5E0"};background:${active ? "#EC1268" : "#fff"};color:${active ? "#fff" : "#4A4A52"};cursor:pointer;transition:all 0.15s ease`
+      };
+    });
+
+    const lang = this.state.lang;
+    const t = (UI_T && UI_T[lang]) || UI_T && UI_T.es || {};
+    const translateM = TR_MODEL || ((m) => m);
+    const catI18n = (CAT_I18N && CAT_I18N[lang]) || {};
+
+    const models = this.state.models || [];
+    const filtered = (this.state.activeCategory === "todos" ? models : models.filter(m => m.category === this.state.activeCategory))
+      .map(m => translateM(m, lang))
+      .map(m => ({ ...m, noImage: !m.image, href: `Modelo.dc.html?slug=${m.slug}`, animKey: m.slug + this.state.activeCategory, cardBg: CARD_BG[m.category] || "linear-gradient(135deg,#F3F1EC,#EAE7E0)" }));
+
+    const allCategories = (this.state.allCategories || []).map(c => {
+      const map = { "Animales": "animales", "Plantas": "plantas", "Videojuegos": "videojuegos", "Series y Películas": "series", "Retro": "retro" };
+      return { ...c, label: catI18n[c.label] || c.label, filterKey: map[c.label] || "todos" };
+    });
+
+    const faqSource = (t && t.faqs && t.faqs.length ? t.faqs : FAQS);
+    const faqs = faqSource.map((f, i) => {
+      const open = this.state.openFaqIdx === i;
+      return { ...f, arrowT: open ? "rotate(45deg)" : "rotate(0deg)", maxH: open ? "200px" : "0px" };
+    });
+
+    return {
+      t,
+      preloaderDisplay: this.state.preloaderDone ? "none" : "flex",
+      toggleLang: this.toggleLang,
+      esOpacity: lang === "es" ? 1 : 0.35,
+      enOpacity: lang === "en" ? 1 : 0.35,
+      categories: cats,
+      filteredModels: filtered,
+      allCategories,
+      faqs,
+      sectionTitle: this.state.activeCategory === "todos" ? t.sectionTitleAll : t.sectionTitleFiltered,
+      resultsCount: `${filtered.length} modelo${filtered.length === 1 ? "" : "s"}`,
+      setCategory: this.setCategory,
+      goCategory: this.goCategory,
+      toggleFaq: this.toggleFaq,
+      howRef: this.setHowRef,
+      step1Op: this.state.step1 ? 1 : 0,
+      step1T: this.state.step1 ? "translateY(0)" : "translateY(18px)",
+      step2Op: this.state.step2 ? 1 : 0,
+      step2T: this.state.step2 ? "translateY(0)" : "translateY(18px)",
+      step3Op: this.state.step3 ? 1 : 0,
+      step3T: this.state.step3 ? "translateY(0)" : "translateY(18px)",
+      email: this.state.email,
+      onEmailChange: this.onEmailChange,
+      subscribe: this.subscribe,
+      subscribed: this.state.subscribed,
+      notSubscribed: !this.state.subscribed,
+
+      pagePad: isMobile ? "14px" : isTablet ? "24px" : "32px",
+      navPadV: isMobile ? "8px" : "14px",
+      navRowGap: isMobile ? "8px" : "24px",
+      logoH: isMobile ? "44px" : "60px",
+      logoH2: isMobile ? "56px" : "120px",
+      logoMargin: isMobile ? "0" : "-8px 0 -46px",
+      ctaPad: isMobile ? "8px 12px" : "11px 22px",
+      ctaLabelDisplay: isMobile ? "display:none" : "display:inline",
+      navDisplay: isMobile ? "none" : "flex",
+      navRightGap: isMobile ? "8px" : "14px",
+      langSwitchDisplay: isMobile ? "none" : "flex",
+      navGap: isDesktop ? "28px" : "14px",
+      navFontSize: isDesktop ? "15px" : "12.5px",
+      heroPadTop: isMobile ? "20px" : "32px",
+      heroGrid: isDesktop ? "1fr 1fr" : "1fr",
+      heroTextOrder: isDesktop ? 0 : 2,
+      heroImageOrder: isDesktop ? 0 : 1,
+      heroGap: isDesktop ? "20px" : "12px",
+      h1Size: isMobile ? "32px" : isTablet ? "46px" : "65px",
+      pSize: isMobile ? "16px" : "18px",
+      h2Size: isMobile ? "24px" : "30px",
+      faqTitleSize: isMobile ? "22px" : "28px",
+      modelsGrid: `repeat(${isDesktop ? 6 : isTablet ? 3 : 2},1fr)`,
+      comoGrid: isMobile ? "1fr" : isTablet ? "repeat(2,1fr)" : "repeat(4,1fr)",
+      comoGap: isMobile ? "36px" : "20px",
+      arrowDisplay: isMobile ? "none" : "block",
+      catSectionGrid: isDesktop ? "1fr 1.4fr" : "1fr",
+      catIconGrid: `repeat(${isMobile ? 2 : isTablet ? 3 : 4},1fr)`,
+      porQueGrid: `repeat(${isMobile ? 2 : isTablet ? 3 : 5},1fr)`,
+      communityPad: isMobile ? "28px 22px" : "44px 40px",
+      newsletterPad: isMobile ? "26px 22px" : "34px 36px",
+      howGrid: "1fr",
+      howSubGrid: isMobile ? "1fr" : "1fr 1fr",
+      communityGrid: isDesktop ? "1fr 2fr" : "1fr",
+      footerGrid: isMobile ? "1fr 1fr" : "1.2fr 1fr 1fr 1.3fr"
+    };
+  }
+}
+
+</script>
+</body>
+</html>
