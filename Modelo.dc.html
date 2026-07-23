@@ -40,6 +40,7 @@
 
   <sc-if value="{{ model }}" hint-placeholder-val="{{ false }}">
     <section style="max-width:1000px;margin:0 auto;padding:50px 32px 20px;display:grid;grid-template-columns:{{ detailGrid }};gap:48px;align-items:start">
+      <button onClick="{{ openModal }}" style="display:{{ mobileCtaDisplay }};background:#EC1268;color:#fff;border:none;padding:17px 30px;border-radius:14px;font-weight:700;font-size:16.5px;cursor:pointer;align-items:center;justify-content:center;gap:8px;width:100%"><img src="uploads/regalo.png" alt="" style="width:20px;height:20px;filter:brightness(0) invert(1)"> {{ t.descargarGratis }}</button>
       <div style="border-radius:24px;overflow:hidden;background:linear-gradient(135deg,#F3F1EC,#EAE7E0);display:flex;align-items:center;justify-content:center;height:420px;animation:fadeUp 0.6s ease both;position:relative">
         <sc-if value="{{ model.model3d }}" hint-placeholder-val="{{ false }}">
           <model-viewer src="{{ model.model3d }}" alt="{{ model.name }}" camera-controls="true" auto-rotate="true" auto-rotate-delay="0" rotation-per-second="20deg" interaction-prompt="none" shadow-intensity="1" exposure="1" style="width:100%;height:100%"></model-viewer>
@@ -73,7 +74,7 @@
           </div>
         </div>
 
-        <button onClick="{{ openModal }}" style="background:#EC1268;color:#fff;border:none;padding:17px 30px;border-radius:14px;font-weight:700;font-size:16.5px;cursor:pointer;transition:transform 0.15s ease;display:inline-flex;align-items:center;gap:8px" style-hover="transform:translateY(-2px)"><img src="uploads/regalo.png" alt="" style="width:20px;height:20px;filter:brightness(0) invert(1)"> {{ t.descargarGratis }}</button>
+        <button onClick="{{ openModal }}" style="display:{{ desktopCtaDisplay }};background:#EC1268;color:#fff;border:none;padding:17px 30px;border-radius:14px;font-weight:700;font-size:16.5px;cursor:pointer;transition:transform 0.15s ease;align-items:center;gap:8px" style-hover="transform:translateY(-2px)"><img src="uploads/regalo.png" alt="" style="width:20px;height:20px;filter:brightness(0) invert(1)"> {{ t.descargarGratis }}</button>
       </div>
     </section>
 
@@ -187,6 +188,8 @@ class Component extends DCLogic {
     return {
       t,
       detailGrid: this.state.width < 800 ? "1fr" : "1fr 1fr",
+      mobileCtaDisplay: this.state.width < 800 ? "flex" : "none",
+      desktopCtaDisplay: this.state.width < 800 ? "none" : "inline-flex",
       toggleLang: this.toggleLang,
       esOpacity: lang === "es" ? 1 : 0.35,
       enOpacity: lang === "en" ? 1 : 0.35,
