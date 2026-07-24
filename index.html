@@ -8,6 +8,7 @@
 <body>
 <x-dc>
 <helmet>
+  <link rel="icon" type="image/png" href="./logo-mrk4rsy9-x8ho.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
   <style>
@@ -155,20 +156,20 @@
       </div>
 
       <div style="display: grid; grid-template-columns: {{ howSubGrid }}; gap: 24px; order: 2; position: relative">
-      <div ref="{{ personalizeRef }}" style="background: #1C9CE7; border-radius: 24px; padding: 30px 28px; color: #fff; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 18px; order: 2; position: relative; max-width: 100%; opacity: {{ personalizeOp }}; transform: {{ personalizeT }}; transition: opacity 0.7s ease, transform 0.7s ease; width: 100%; max-width: 502px; min-height: 130px">
+      <div ref="{{ personalizeRef }}" style="background: #1C9CE7; border-radius: 24px; padding: 30px 28px; color: #fff; display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 18px; order: 2; position: relative; max-width: 100%; opacity: {{ personalizeOp }}; transform: {{ personalizeT }}; transition: opacity 0.7s ease, transform 0.7s ease; width: 100%; min-height: 130px; box-sizing: border-box">
         <div style="position: relative">
           
           
           <div style="font-size: 24px; font-weight: 800; line-height: 1.2; margin-top: -8px; margin-bottom: 8px; font-family: CreativeBlock">{{ t.personalizeTitle }}</div><p style="font-size: 13.5px; line-height: 1.5; opacity: 0.9; margin: 0 0 14px">{{ t.personalizeDesc }}</p><div style="background: #fff; color: #1C9CE7; font-weight: 800; font-size: 13px; padding: 11px 20px; border-radius: 100px; text-align: center; width: fit-content">{{ t.personalizeSoon }}</div>
           
         </div>
-        <div style="position:relative;width:100px;height:130px;flex:none">
+        <div style="position:relative;width:{{ personalizePhotoW }};height:130px;flex:none">
           <img src="uploads/Personalido-auto.jpg" alt="PaperTok de auto personalizado" loading="lazy" style="position: absolute; top: 51px; left: 7px; width: 98px; height: 121px; border-radius: 12px; object-fit: cover; border: 3px solid rgb(255, 255, 255); box-shadow: rgba(0, 0, 0, 0.25) 0px 8px 16px; transform: rotate(7deg)">
           <img src="uploads/Personalizado.jpg" alt="Persona con su PaperTok personalizado" loading="lazy" style="position: absolute; top: -39px; width: 100px; height: 121px; border-radius: 12px; object-fit: cover; border: 3px solid #fff; box-shadow: 0 8px 16px rgba(0,0,0,0.25); transform: rotate(-8deg); left: -17px">
         </div>
       </div>
 
-      <div ref="{{ newsletterRef }}" style="border: 2px dashed #EC1268; border-radius: 22px; padding: 26px 24px; display: flex; flex-direction: column; justify-content: center; gap: 14px; background: #FFFBFC; order: 3; position: relative; overflow: visible; opacity: {{ newsletterOp }}; transform: {{ newsletterT }}; transition: opacity 0.7s ease, transform 0.7s ease; width: 100%; max-width: 398px; min-height: 123px">
+      <div ref="{{ newsletterRef }}" style="border: 2px dashed #EC1268; border-radius: 22px; padding: 26px 24px; display: flex; flex-direction: column; justify-content: center; gap: 14px; background: #FFFBFC; order: 3; position: relative; overflow: visible; opacity: {{ newsletterOp }}; transform: {{ newsletterT }}; transition: opacity 0.7s ease, transform 0.7s ease; width: 100%; max-width: 398px; min-height: 123px; box-sizing: border-box">
         
         <div>
           <div style="font-weight: 700; font-size: 24px; margin-bottom: 4px; font-family: CreativeBlock; color: #EC1268">{{ t.newsletterTitle }}</div>
@@ -177,7 +178,7 @@
           </sc-if>
           <sc-if value="{{ notSubscribed }}">
             <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
-              <input type="email" value="{{ email }}" onChange="{{ onEmailChange }}" placeholder="{{ t.newsletterEmailPh }}" style="flex: 1; min-width: 180px; padding: 12px 14px; border-radius: 12px; border: 1.5px solid #E7E5E0; font-size: 14px; font-family: inherit; width: 166px; height: 12px">
+              <input type="email" value="{{ email }}" onChange="{{ onEmailChange }}" placeholder="{{ t.newsletterEmailPh }}" style="flex: 1; min-width: 180px; padding: 12px 14px; border-radius: 12px; border: 1.5px solid #E7E5E0; font-size: 14px; font-family: inherit; width: 163px; height: 11px">
               <button onClick="{{ subscribe }}" style="background:#EC1268;color:#fff;border:none;padding:12px 18px;border-radius:12px;font-weight:700;font-size:14px;cursor:pointer;transition:transform 0.15s ease" style-hover="transform:translateY(-2px)">{{ t.newsletterBtn }}</button>
             </div>
             <div style="margin-top:8px;font-size:12px"><a href="#modelos">{{ t.newsletterSkip }}</a></div>
@@ -188,11 +189,11 @@
       </div>
     </div>
 
-    <div ref="{{ socialRef }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 32px; flex-wrap: wrap; max-width: 100%; position: relative; opacity: {{ socialOp }}; transform: {{ socialT }}; transition: opacity 0.7s ease, transform 0.7s ease">
+    <div ref="{{ socialRef }}" style="display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 44px; flex-wrap: wrap; max-width: 100%; position: relative; opacity: {{ socialOp }}; transform: {{ socialT }}; transition: opacity 0.7s ease, transform 0.7s ease">
       <a href="https://www.tiktok.com/@papertoks?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noopener"><img src="uploads/Botón tik tok.png" alt="Síguenos en TikTok" style="height: 43px; transition: transform 0.15s ease; width: 149px" style-hover="transform:translateY(-2px)"></a>
       <a href="https://www.instagram.com/papertok/" target="_blank" rel="noopener"><img src="uploads/Botón Instagram.png" alt="Síguenos en Instagram" style="height: 43px; transition: transform 0.15s ease; width: 153px" style-hover="transform:translateY(-2px)"></a>
       <a href="https://www.youtube.com/@Papertok-u8z" target="_blank" rel="noopener"><img src="uploads/YT-70ebf17a.png" alt="Síguenos en YouTube" style="height: 47px; transition: transform 0.15s ease; width: 146px" style-hover="transform:translateY(-2px)"></a>
-    <img src="uploads/Perezoso.png" alt="Perezoso colgando de la caja" style="position: absolute; top: -70px; width: {{ perezosoW }}; height: auto; transform: rotate(24deg); z-index: 2; pointer-events: none; right: 0"></div>
+    </div>
   </section>
 
   <!-- FAQ -->
@@ -517,12 +518,13 @@ class Component extends DCLogic {
       communityPad: isMobile ? "28px 22px" : "44px 40px",
       newsletterPad: isMobile ? "26px 22px" : "34px 36px",
       perezosoW: isMobile ? "110px" : "191px",
+      personalizePhotoW: isMobile ? "72px" : "100px",
       thumbW: isTablet ? "190px" : "244px",
       thumbLeft: isMobile ? "auto" : "calc(50% - 15px)",
       thumbBottom: isDesktop ? "-30px" : "-20px",
       thumbDisplay: isMobile ? "none" : "block",
       howGrid: "minmax(0,1fr)",
-      howSubGrid: isMobile ? "minmax(0,1fr)" : "minmax(0,1fr) minmax(0,1fr)",
+      howSubGrid: isMobile ? "minmax(0,1fr)" : "minmax(0,0.8fr) minmax(0,1fr)",
       communityGrid: isDesktop ? "1fr 2fr" : "1fr",
       footerGrid: isMobile ? "1fr 1fr" : "1.2fr 1fr 1fr 1.3fr"
     };
