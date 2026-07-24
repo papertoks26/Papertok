@@ -168,7 +168,7 @@
         </div>
       </div>
 
-      <div ref="{{ newsletterRef }}" style="border: 2px dashed #EC1268; border-radius: 22px; padding: 26px 24px; display: flex; flex-direction: column; justify-content: center; gap: 14px; background: #FFFBFC; order: 3; position: relative; overflow: visible; opacity: {{ newsletterOp }}; transform: {{ newsletterT }}; transition: opacity 0.7s ease, transform 0.7s ease; width: 398px; height: 123px">
+      <div ref="{{ newsletterRef }}" style="border: 2px dashed #EC1268; border-radius: 22px; padding: 26px 24px; display: flex; flex-direction: column; justify-content: center; gap: 14px; background: #FFFBFC; order: 3; position: relative; overflow: visible; opacity: {{ newsletterOp }}; transform: {{ newsletterT }}; transition: opacity 0.7s ease, transform 0.7s ease; width: 100%; max-width: 398px; min-height: 123px">
         
         <div>
           <div style="font-weight: 700; font-size: 24px; margin-bottom: 4px; font-family: CreativeBlock; color: #EC1268">{{ t.newsletterTitle }}</div>
@@ -192,7 +192,7 @@
       <a href="https://www.tiktok.com/@papertoks?is_from_webapp=1&amp;sender_device=pc" target="_blank" rel="noopener"><img src="uploads/Botón tik tok.png" alt="Síguenos en TikTok" style="height: 43px; transition: transform 0.15s ease; width: 149px" style-hover="transform:translateY(-2px)"></a>
       <a href="https://www.instagram.com/papertok/" target="_blank" rel="noopener"><img src="uploads/Botón Instagram.png" alt="Síguenos en Instagram" style="height: 43px; transition: transform 0.15s ease; width: 153px" style-hover="transform:translateY(-2px)"></a>
       <a href="https://www.youtube.com/@Papertok-u8z" target="_blank" rel="noopener"><img src="uploads/YT-70ebf17a.png" alt="Síguenos en YouTube" style="height: 47px; transition: transform 0.15s ease; width: 146px" style-hover="transform:translateY(-2px)"></a>
-    <img src="uploads/Perezoso.png" alt="Perezoso colgando de la caja" style="position: absolute; top: -68px; width: {{ perezosoW }}; height: auto; transform: rotate(24deg); z-index: 2; pointer-events: none; left: 281px"></div>
+    <img src="uploads/Perezoso.png" alt="Perezoso colgando de la caja" style="position: absolute; top: -70px; width: {{ perezosoW }}; height: auto; transform: rotate(24deg); z-index: 2; pointer-events: none; left: 305px"></div>
   </section>
 
   <!-- FAQ -->
@@ -508,7 +508,7 @@ class Component extends DCLogic {
       h2Size: isMobile ? "24px" : "30px",
       faqTitleSize: isMobile ? "22px" : "28px",
       modelsGrid: `repeat(${isDesktop ? 6 : isTablet ? 3 : 2},1fr)`,
-      comoGrid: isMobile ? "1fr" : isTablet ? "repeat(2,1fr)" : "repeat(4,1fr)",
+      comoGrid: isMobile ? "minmax(0,1fr)" : isTablet ? "repeat(2,minmax(0,1fr))" : "repeat(4,minmax(0,1fr))",
       comoGap: isMobile ? "36px" : "20px",
       arrowDisplay: isMobile ? "none" : "block",
       catSectionGrid: isDesktop ? "1fr 1.4fr" : "1fr",
@@ -521,8 +521,8 @@ class Component extends DCLogic {
       thumbLeft: isMobile ? "auto" : "calc(50% - 15px)",
       thumbBottom: isDesktop ? "-30px" : "-20px",
       thumbDisplay: isMobile ? "none" : "block",
-      howGrid: "1fr",
-      howSubGrid: isMobile ? "1fr" : "1fr 1fr",
+      howGrid: "minmax(0,1fr)",
+      howSubGrid: isMobile ? "minmax(0,1fr)" : "minmax(0,1fr) minmax(0,1fr)",
       communityGrid: isDesktop ? "1fr 2fr" : "1fr",
       footerGrid: isMobile ? "1fr 1fr" : "1.2fr 1fr 1fr 1.3fr"
     };
