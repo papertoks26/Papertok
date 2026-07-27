@@ -3,6 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PaperToks | Modelo de papel gratis</title>
+<meta name="description" content="Descarga modelos de papel gratuitos para imprimir, recortar y armar.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="PaperToks">
+<meta property="og:description" content="Descarga modelos de papel gratuitos para imprimir y armar.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="PaperToks">
+<meta name="twitter:description" content="Descarga modelos de papel gratuitos para imprimir y armar.">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -134,9 +142,29 @@ class Component extends DCLogic {
   _onResize = () => this.setState({ width: window.innerWidth });
 
   componentDidMount() {
-    import("./models-data.js").then(m => this.setState({ models: m.MODELS }));
-    i18nReady.then(() => this.setState({ lang: getLang_() }));
+    import("./models-data.js").then(m => { this.setState({ models: m.MODELS }); this._updateHead(); });
+    i18nReady.then(() => this.setState({ lang: getLang_() }, () => this._updateHead()));
     window.addEventListener("resize", this._onResize);
+  }
+
+  componentDidUpdate() { this._updateHead(); }
+
+  _updateHead() {
+    const models = this.state.models || [];
+    const model = models.find(m => m.slug === this.getSlug());
+    if (!model) return;
+    const title = `${model.cardTitle} — PDF gratis para imprimir y armar | PaperToks`;
+    const desc = model.altText || `Descarga gratis el modelo de papel ${model.cardTitle}, imprime y arma tu propia figura papercraft.`;
+    if (document.title !== title) document.title = title;
+    const setMeta = (sel, attr, val) => {
+      const el = document.head.querySelector(sel);
+      if (el) el.setAttribute(attr, val);
+    };
+    setMeta('meta[name="description"]', "content", desc);
+    setMeta('meta[property="og:title"]', "content", title);
+    setMeta('meta[property="og:description"]', "content", desc);
+    setMeta('meta[name="twitter:title"]', "content", title);
+    setMeta('meta[name="twitter:description"]', "content", desc);
   }
 
   componentWillUnmount() {
