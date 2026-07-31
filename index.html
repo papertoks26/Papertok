@@ -474,7 +474,7 @@ class Component extends DCLogic {
     const models = this.state.models || [];
     const filtered = (this.state.activeCategory === "todos" ? models : models.filter(m => m.category === this.state.activeCategory))
       .map(m => translateM(m, lang))
-      .map(m => ({ ...m, noImage: !m.image, href: `Modelo.dc.html?slug=${m.slug}`, animKey: m.slug + this.state.activeCategory, cardBg: CARD_BG[m.category] || "linear-gradient(135deg,#F3F1EC,#EAE7E0)" }));
+      .map(m => ({ ...m, noImage: !m.image, href: `Modelo.html?slug=${m.slug}`, animKey: m.slug + this.state.activeCategory, cardBg: CARD_BG[m.category] || "linear-gradient(135deg,#F3F1EC,#EAE7E0)" }));
 
     const allCategories = (this.state.allCategories || []).map(c => {
       const map = { "Animales": "animales", "Plantas": "plantas", "Videojuegos": "videojuegos", "Series y Películas": "series", "Retro": "retro" };
