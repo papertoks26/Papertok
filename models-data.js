@@ -1,5 +1,27 @@
 export const MODELS = [
   {
+    slug: "spiderman",
+    name: "Hombre Araña",
+    cardTitle: "🕷️ Hombre Araña",
+    altText: "Figura de papel del Hombre Araña armado con técnica papercraft, con dos variantes de textura para elegir",
+    image: "uploads/Spiderman-preview.png",
+    model3d: "uploads/Spiderman.glb",
+    pdfUrl: "uploads/Spiderman-e8254ea9.pdf",
+    category: "series",
+    categoryLabel: "Series y Películas",
+    difficulty: "facil",
+    difficultyLabel: "⭐ Fácil",
+    time: "40 min",
+    badge: "✨ Recién salido del horno",
+    tagNew: true,
+    description: "El trepamuros en versión papercraft. Elige tu textura favorita antes de descargar: clásico cómic o pop-art retro.",
+    materials: ["Tijeras", "Papel (120g o más)", "Impresora"],
+    textures: [
+      { label: "Clásico", image: "uploads/Spiderman-text1.png", pdfUrl: "uploads/Spiderman-e8254ea9.pdf", model3d: "uploads/Spiderman.glb" },
+      { label: "Pop-Art", image: "uploads/Spiderman-text2.png", pdfUrl: "uploads/Spiderman2-d09194b0.pdf", model3d: "uploads/Spiderman variante.glb" }
+    ]
+  },
+  {
     slug: "capibara",
     name: "Capibara relajado",
     cardTitle: "🐹 Capibara relajado",
