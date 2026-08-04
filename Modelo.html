@@ -226,7 +226,7 @@ class Component extends DCLogic {
       series: "linear-gradient(135deg,#FBD9E7,#F3B8D2)",
       retro: "linear-gradient(135deg,#FFF3C4,#F5DE8E)"
     };
-    const related = models.filter(m => m.slug !== slug).slice(0, 3).map(m => translateM(m, lang)).map(m => ({ ...m, href: `Modelo.html?slug=${m.slug}`, cardBg: m.slug === "conejito" ? "linear-gradient(135deg,#D6EEFB,#AEDCF5)" : (CARD_BG[m.category] || "linear-gradient(135deg,#F3F1EC,#EAE7E0)" }));
+    const related = models.filter(m => m.slug !== slug).slice(0, 3).map(m => translateM(m, lang)).map(m => ({ ...m, href: `Modelo.html?slug=${m.slug}`, cardBg: m.slug === "conejito" ? "linear-gradient(135deg,#D6EEFB,#AEDCF5)" : (CARD_BG[m.category] || "linear-gradient(135deg,#F3F1EC,#EAE7E0)") }));
     const hasTextures = !!(model && model.textures && model.textures.length);
     const tIdx = hasTextures ? Math.min(this.state.textureIdx, model.textures.length - 1) : 0;
     const activeTexture = hasTextures ? model.textures[tIdx] : null;
