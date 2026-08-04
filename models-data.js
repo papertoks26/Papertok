@@ -22,6 +22,24 @@ export const MODELS = [
     ]
   },
   {
+    slug: "conejito",
+    name: "Conejito",
+    cardTitle: "🐰 Conejito",
+    altText: "Figura de papel de un conejito con orejas largas armado en papercraft",
+    image: "uploads/Conejito.png",
+    model3d: "uploads/Conejito.glb",
+    pdfUrl: "uploads/Conejito.pdf",
+    category: "animales",
+    categoryLabel: "Animales",
+    difficulty: "facil",
+    difficultyLabel: "⭐ Fácil",
+    time: "20 min",
+    badge: "🌱 Ideal para empezar",
+    tagNew: true,
+    description: "Tierno, orejón y con cachetes rosados. Un modelo simple y adorable para sumar a tu colección de animales.",
+    materials: ["Tijeras", "Papel (120g o más)", "Impresora"]
+  },
+  {
     slug: "capibara",
     name: "Capibara relajado",
     cardTitle: "🐹 Capibara relajado",
