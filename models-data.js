@@ -40,6 +40,24 @@ export const MODELS = [
     materials: ["Tijeras", "Papel (120g o más)", "Impresora"]
   },
   {
+    slug: "mono-cariblanco",
+    name: "Mono Cariblanco",
+    cardTitle: "🐒 Mono Cariblanco",
+    altText: "Figura de papel de un mono cariblanco armado en papercraft",
+    image: "uploads/Mono Cariblanco.png",
+    model3d: "uploads/Mono Cariblanco.glb",
+    pdfUrl: "uploads/Mono Cariblanco.pdf",
+    category: "animales",
+    categoryLabel: "Animales",
+    difficulty: "facil",
+    difficultyLabel: "⭐ Fácil",
+    time: "40 min",
+    badge: "🌱 Ideal para empezar",
+    tagNew: true,
+    description: "Carita blanca, cuerpo naranja y cola enroscada. Un modelo lleno de personalidad para tu colección de animales.",
+    materials: ["Tijeras", "Papel (120g o más)", "Impresora"]
+  },
+  {
     slug: "capibara",
     name: "Capibara relajado",
     cardTitle: "🐹 Capibara relajado",
