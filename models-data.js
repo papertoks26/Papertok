@@ -1,5 +1,23 @@
 export const MODELS = [
   {
+    slug: "monstruo-galletas",
+    name: "Monstruo de Galletas",
+    cardTitle: "🍪 Monstruo de Galletas",
+    altText: "Dispensador de papel con forma de monstruo peludo morado con cuernos, boca abierta para guardar galletas, armado en papercraft",
+    image: "uploads/Monster cookies-54e7fcdb.png",
+    model3d: "uploads/Monster Cookies.glb",
+    pdfUrl: "uploads/Monster Cookies.pdf",
+    category: "empaques",
+    categoryLabel: "Empaques",
+    difficulty: "facil",
+    difficultyLabel: "⭐ Fácil",
+    time: "50 min",
+    badge: "✨ Recién salido del horno",
+    tagNew: true,
+    description: "Un dispensador de galletas con boca de monstruo peludo. Va en tamaño tabloide: vale cada doblez, y una vez armado guarda tus galletas favoritas.",
+    materials: ["Tijeras", "Papel (120g o más)", "Impresora", "Pegamento"]
+  },
+  {
     slug: "spiderman",
     name: "Hombre Araña",
     cardTitle: "🕷️ Hombre Araña",
@@ -281,7 +299,8 @@ export const CATEGORIES = [
   { key: "plantas", label: "Plantas", emoji: "🌵" },
   { key: "videojuegos", label: "Videojuegos", emoji: "🎮" },
   { key: "retro", label: "Retro", emoji: "📼" },
-  { key: "series", label: "Series y Películas", emoji: "🎬" }
+  { key: "series", label: "Series y Películas", emoji: "🎬" },
+  { key: "empaques", label: "Empaques", emoji: "🎁" }
 ];
 
 export const ALL_CATEGORIES = [
